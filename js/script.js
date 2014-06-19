@@ -11,9 +11,10 @@ $(document).ready(function () {
     var numberOfRows = Math.ceil(blocks / numberOfBlocksPerRow);
     //The array which stores the locations of the mine
     var mineMap = [];
+    var playerMineMap = [];
     var init = function () {
-        str="";mineMap=[];
-        //render the $("#" + param).find("img")s
+        str="";mineMap=[];playerMineMap=[];
+        $("#mode").removeClass("flag").addClass("mine")
         for (var i = 0; i < numberOfRows; i++) {
             str += '<div class="tray clear">';
             for (var j = 1; j <= numberOfBlocksPerRow; j++) {
@@ -62,11 +63,8 @@ $(document).ready(function () {
                 var matchedMineLocation = mineMap.indexOf(tileLocation);
                 if(matchedMineLocation!==-1)
                 {   
-                    
-                  
                     mineCount++;
                     $(this).html(mineCount);
-                    
                      
                 }
                    
@@ -145,11 +143,16 @@ $(document).ready(function () {
     };
     var allMinesIdentified = function()
     {
-
+        playerMineMap.push(parseInt($(this).attr("location")));
+        if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
+        {
+            alert("You Win");
+            init();
+        }
     };
     var flagMine = function()
     {
-        $(this).addClass("flag");
+        $(this).toggleClass("flag");
         allMinesIdentified.call(this);
 
     }
