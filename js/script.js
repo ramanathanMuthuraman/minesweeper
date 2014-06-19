@@ -4,7 +4,7 @@ $(document).ready(function () {
     //declare the number of blocks of the game
     var blocks = 100;
     //declare the number of mines in the game
-    var numberOfMines = 10;
+    var numberOfMines = 2;
     //no. of blocks per row
     var numberOfBlocksPerRow = 10;
     //deduce the number of rows
