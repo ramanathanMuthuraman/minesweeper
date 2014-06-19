@@ -6,7 +6,7 @@ $(document).ready(function () {
     //declare the number of mines in the game
     var numberOfMines = 10;
     //no. of blocks per row
-    var numberOfBlocksPerRow = 5;
+    var numberOfBlocksPerRow = 10;
     //deduce the number of rows
     var numberOfRows = Math.ceil(blocks / numberOfBlocksPerRow);
     //The array which stores the locations of the mine
@@ -125,28 +125,54 @@ $(document).ready(function () {
     var findMines = function()
     {
       
+            /*check if te player has clicked on mine*/
+            if(mineMap.indexOf(parseInt($(this).attr("location"))) === -1 )
+            {
+                var location = $(this).attr("location");
+                var currentTray = $(this).closest(".tray");
+                var topTray = currentTray.prev(".tray");
+                var bottomTray = currentTray.next(".tray");
+                mapSiblingTiles.call(this,location,currentTray,topTray,bottomTray,this);
+            }
+            else
+            {
+                $(this).addClass("mine");
+                alert("gameover");
+                init();
+            }
+      
+             
+    };
+    var allMinesIdentified = function()
+    {
 
-        if(mineMap.indexOf(parseInt($(this).attr("location"))) === -1 )
+    };
+    var flagMine = function()
+    {
+        $(this).addClass("flag");
+        allMinesIdentified.call(this);
+
+    }
+    var checkMode = function()
+    {
+
+        if($("#mode").hasClass("mine"))
         {
-            var location = $(this).attr("location");
-            var currentTray = $(this).closest(".tray");
-            var topTray = currentTray.prev(".tray");
-            var bottomTray = currentTray.next(".tray");
-            mapSiblingTiles.call(this,location,currentTray,topTray,bottomTray,this);
+            findMines.call(this);
         }
         else
         {
-            $(this).text("Mine");
-            alert("gameover");
-            init();
+            flagMine.call(this);
         }
-        
+    };
 
-      
-       
+    var setMode = function()
+    {
+       $(this).toggleClass("mine flag");
     }
     /*Event handler for user's click on the tile*/
-    $("#colosseum").on("click",".tile.active",findMines);
+    $("#colosseum").on("click",".tile.active",checkMode);
+    $("#mode").on("click",setMode);
     init();
     
 });

@@ -8,7 +8,8 @@
 .tile{
    height: 50px;
    width: 50px;
-   background: #ccc;
+  text-align: center;
+  font-size: 48px;
   
 }
 .active
@@ -17,7 +18,8 @@
 }
 .inactive{
 
-	 border: 1px solid #000;
+	 border: none;
+	 padding: 1px;
 }
 .left
 {
@@ -26,4 +28,18 @@
 .clear
 {
 	clear: both;
+}
+#mode{
+
+	height: 48px;
+	width: 48px;
+	border: none;
+}
+.mine
+{
+	background: url("../img/mine.png") no-repeat;
+}
+.flag
+{
+	background: url("../img/flag.png") no-repeat;
 }
