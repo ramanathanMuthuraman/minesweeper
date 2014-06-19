@@ -1,0 +1,29 @@
+*{
+	margin:0;
+	padding: 0;
+}
+.tray{
+
+}
+.tile{
+   height: 50px;
+   width: 50px;
+   background: #ccc;
+  
+}
+.active
+{
+	 border: 1px solid #f00;
+}
+.inactive{
+
+	 border: 1px solid #000;
+}
+.left
+{
+	float: left;
+}
+.clear
+{
+	clear: both;
+}
