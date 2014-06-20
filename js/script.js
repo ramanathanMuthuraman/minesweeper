@@ -165,7 +165,7 @@ $(document).ready(function () {
          $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
         {
-            alert("You Win in"+(time/60)+"mins");
+            alert("You Win in "+time+" secs");
             init();
         }
     };
