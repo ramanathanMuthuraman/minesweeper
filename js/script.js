@@ -2,11 +2,11 @@ $(document).ready(function () {
 
     var str = "";
     //declare the number of blocks of the game
-    var blocks = 100;
+    var blocks = 50;
     //declare the number of mines in the game
-    var numberOfMines = 2;
+    var numberOfMines = 10;
     //no. of blocks per row
-    var numberOfBlocksPerRow = 10;
+    var numberOfBlocksPerRow = 5;
     //deduce the number of rows
     var numberOfRows = Math.ceil(blocks / numberOfBlocksPerRow);
     //The array which stores the locations of the mine
@@ -14,7 +14,8 @@ $(document).ready(function () {
     var playerMineMap = [];
     var init = function () {
         str="";mineMap=[];playerMineMap=[];
-        $("#mode").removeClass("flag").addClass("mine")
+        $(".toggleSlider").removeClass("flag").addClass("mine");
+        $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         for (var i = 0; i < numberOfRows; i++) {
             str += '<div class="tray clear">';
             for (var j = 1; j <= numberOfBlocksPerRow; j++) {
@@ -144,6 +145,7 @@ $(document).ready(function () {
     var allMinesIdentified = function()
     {
         playerMineMap.push(parseInt($(this).attr("location")));
+         $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
         {
             alert("You Win");
@@ -159,7 +161,7 @@ $(document).ready(function () {
     var checkMode = function()
     {
 
-        if($("#mode").hasClass("mine"))
+        if($(".toggleSlider").hasClass("mine"))
         {
             findMines.call(this);
         }
@@ -176,6 +178,19 @@ $(document).ready(function () {
     /*Event handler for user's click on the tile*/
     $("#colosseum").on("click",".tile.active",checkMode);
     $("#mode").on("click",setMode);
+    $(".toggleSlider").on("click",function(){
+        if($(this).hasClass("mine")){
+
+            $(this).animate({"left":"52px"});
+        }
+        else
+        {
+            $(this).animate({"left":"0"});
+        
+        }
+         $(this).toggleClass("mine flag");
+       setMode(); 
+    });
     init();
     
 });

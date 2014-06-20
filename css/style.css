@@ -2,15 +2,16 @@
 	margin:0;
 	padding: 0;
 }
-.tray{
-
-}
 .tile{
    height: 50px;
    width: 50px;
   text-align: center;
   font-size: 48px;
   
+}
+.largeFont
+{
+	 font-size: 48px;
 }
 .active
 {
@@ -42,4 +43,55 @@
 .flag
 {
 	background: url("../img/flag.png") no-repeat;
+}
+.switch {
+	position: relative;
+	display: inline-block;
+	color: #ccc;
+	height: 48px;
+	padding: 2px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 4px;
+	background: #ececec;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.1), inset 0px 1px 3px 0px rgba(0,0,0,0.1);
+	cursor: pointer;
+}
+
+.spanBlock { 
+	display: inline-block; 
+	width: 48px; 
+	height: 48px;
+}
+
+.switch .toggleSlider {
+position: absolute;
+top: 1px;
+width: 48px;
+height: 48px;
+border: 1px solid #ccc;
+border: 1px solid rgba(0,0,0,0.3);
+border-radius: 4px;
+left: 0;
+background: #fff;
+background: -moz-linear-gradient(top,  #ececec 0%, #ffffff 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ececec), color-stop(100%,#ffffff));
+background: -webkit-linear-gradient(top,  #ececec 0%,#ffffff 100%);
+background: -o-linear-gradient(top,  #ececec 0%,#ffffff 100%);
+background: -ms-linear-gradient(top,  #ececec 0%,#ffffff 100%);
+background: linear-gradient(top,  #ececec 0%,#ffffff 100%);
+box-shadow: inset 0px 1px 0px 0px rgba(255,255,255,0.5);
+z-index: 999;
+
+}
+.container
+{
+	width: 260px;
+	margin: 0 auto;
+}
+.right{
+	float: right;
+}
+#minesFlaggedCount{
+	text-align: center;
 }
