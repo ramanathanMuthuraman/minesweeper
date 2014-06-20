@@ -4,7 +4,7 @@ $(document).ready(function () {
     //declare the number of blocks of the game
     var blocks = 50;
     //declare the number of mines in the game
-    var numberOfMines = 10;
+    var numberOfMines = 5;
     //no. of blocks per row
     var numberOfBlocksPerRow = 5;
     //deduce the number of rows
@@ -82,12 +82,16 @@ $(document).ready(function () {
                      if(tileSiblings[tile].length)
                      {
                         //tileSiblings[tile].html(0)
-                        tileSiblings[tile].removeClass("active").addClass("inactive");
-                       
-                           /*call the function recursively*/
-                        if(tile !== "currentTile")
-                        {
-                            findMines.call(tileSiblings[tile]);
+                        if(!tileSiblings[tile].hasClass("flag")){
+
+
+                            tileSiblings[tile].removeClass("active").addClass("inactive");
+                           
+                               /*call the function recursively*/
+                            if(tile !== "currentTile")
+                            {
+                                findMines.call(tileSiblings[tile]);
+                            }
                         }
                         
                      }
@@ -129,7 +133,7 @@ $(document).ready(function () {
     {
       
             /*check if te player has clicked on mine*/
-            if(mineMap.indexOf(parseInt($(this).attr("location"))) === -1 )
+            if(mineMap.indexOf(parseInt($(this).attr("location"))) === -1 && !($(this).hasClass("flag")))
             {
                 var location = $(this).attr("location");
                 var currentTray = $(this).closest(".tray");
@@ -148,13 +152,14 @@ $(document).ready(function () {
     };
     var allMinesIdentified = function()
     {
+       
         if($(this).hasClass("flag"))
         {
             playerMineMap.push(parseInt($(this).attr("location")));
         }
         else
         {
-            playerMineMap.splice(playerMineMap.indexOf(parseInt($(this).attr("location"))));
+            playerMineMap.splice(playerMineMap.indexOf(parseInt($(this).attr("location"))),1);
         }
         
          $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
@@ -178,15 +183,17 @@ $(document).ready(function () {
             time++;
 
         },1000);
-
-        if($(".toggleSlider").hasClass("mine"))
-        {
-            findMines.call(this);
-        }
-        else
-        {
-            flagMine.call(this);
-        }
+      
+           
+            if($(".toggleSlider").hasClass("mine") && !($(this).hasClass("flag")))
+            {
+                findMines.call(this);
+            }
+            else
+            {
+                flagMine.call(this);
+            }
+        
     };
 
     var setMode = function()
