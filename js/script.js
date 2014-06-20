@@ -12,9 +12,13 @@ $(document).ready(function () {
     //The array which stores the locations of the mine
     var mineMap = [];
     var playerMineMap = [];
+
+    var timer = 0,time=0;
     var init = function () {
-        str="";mineMap=[];playerMineMap=[];
+        str="";mineMap=[];playerMineMap=[],time=0;
+        clearInterval(timer);
         $(".toggleSlider").removeClass("flag").addClass("mine");
+        $(".toggleSlider").animate({"left":"0"});
         $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         for (var i = 0; i < numberOfRows; i++) {
             str += '<div class="tray clear">';
@@ -144,11 +148,19 @@ $(document).ready(function () {
     };
     var allMinesIdentified = function()
     {
-        playerMineMap.push(parseInt($(this).attr("location")));
+        if($(this).hasClass("flag"))
+        {
+            playerMineMap.push(parseInt($(this).attr("location")));
+        }
+        else
+        {
+            playerMineMap.splice(playerMineMap.indexOf(parseInt($(this).attr("location"))));
+        }
+        
          $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
         {
-            alert("You Win");
+            alert("You Win in"+(time/60)+"mins");
             init();
         }
     };
@@ -160,6 +172,12 @@ $(document).ready(function () {
     }
     var checkMode = function()
     {
+        /*start the timer*/
+        timer = setInterval(function(){
+
+            time++;
+
+        },1000);
 
         if($(".toggleSlider").hasClass("mine"))
         {
