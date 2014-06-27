@@ -4,7 +4,7 @@ $(document).ready(function () {
     //declare the number of blocks of the game
     var blocks = 50;
     //declare the number of mines in the game
-    var numberOfMines = 5;
+    var numberOfMines = 10;
     //no. of blocks per row
     var numberOfBlocksPerRow = 5;
     //deduce the number of rows
@@ -69,7 +69,8 @@ $(document).ready(function () {
                 if(matchedMineLocation!==-1)
                 {   
                     mineCount++;
-                    $(this).html(mineCount);
+                    $(this).html(mineCount).removeClass("active").addClass("inactive");
+                    
                      
                 }
                    
@@ -165,7 +166,7 @@ $(document).ready(function () {
          $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
         {
-            alert("You Win in "+time+" secs");
+            alert("You Win in"+time+"seconds");
             init();
         }
     };
@@ -195,15 +196,8 @@ $(document).ready(function () {
             }
         
     };
-
-    var setMode = function()
+    var changeMode = function()
     {
-       $(this).toggleClass("mine flag");
-    }
-    /*Event handler for user's click on the tile*/
-    $("#colosseum").on("click",".tile.active",checkMode);
-    $("#mode").on("click",setMode);
-    $(".toggleSlider").on("click",function(){
         if($(this).hasClass("mine")){
 
             $(this).animate({"left":"52px"});
@@ -214,8 +208,12 @@ $(document).ready(function () {
         
         }
          $(this).toggleClass("mine flag");
-       setMode(); 
-    });
+      
+    };
+   
+    /*Event handler for user's click on the tile*/
+    $("#colosseum").on("click",".tile.active",checkMode);
+    $(".toggleSlider").on("click",changeMode);
     init();
     
 });
