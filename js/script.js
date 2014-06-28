@@ -227,6 +227,7 @@ $(document).ready(function () {
     /*Event handler for user's click on the tile*/
     $("#colosseum").on("click",".tile.active",checkMode);
     $(".toggleSlider").on("click",changeMode);
+    $(".toggleSlider").on("touchmove",changeMode);
     init();
     
 });
