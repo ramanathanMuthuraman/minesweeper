@@ -16,7 +16,8 @@ $(document).ready(function () {
     var timer = 0,time=0;
     var init = function () {
         str="";mineMap=[];playerMineMap=[],time=0;
-        clearInterval(timer);
+        timer = clearInterval(timer);
+       
         $(".toggleSlider").removeClass("flag").addClass("mine");
         $(".toggleSlider").animate({"left":"0"});
         $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
@@ -146,6 +147,7 @@ $(document).ready(function () {
             {
                 $(this).addClass("mine");
                 alert("gameover");
+                
                 init();
             }
       
@@ -166,7 +168,14 @@ $(document).ready(function () {
          $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         if($(playerMineMap).not(mineMap).length == 0 && $(mineMap).not(playerMineMap).length == 0)
         {
-            alert("You Win in"+time+"seconds");
+            var mins = Math.floor(time/60);
+            var elapsedTime = "";
+            if(mins)
+            {
+                elapsedTime = mins + " mins ";
+            }
+            elapsedTime +=  (time%60)+" secs";
+            alert("You Win in "+elapsedTime);
             init();
         }
     };
@@ -179,12 +188,16 @@ $(document).ready(function () {
     var checkMode = function()
     {
         /*start the timer*/
-        timer = setInterval(function(){
+        if(!timer)
+        
+        {
+            
+            timer = setInterval(function(){
 
             time++;
 
-        },1000);
-      
+            },1000);
+        }
            
             if($(".toggleSlider").hasClass("mine") && !($(this).hasClass("flag")))
             {
