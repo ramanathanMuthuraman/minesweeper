@@ -18,8 +18,7 @@ $(document).ready(function () {
         str="";mineMap=[];playerMineMap=[],time=0;
         timer = clearInterval(timer);
        
-        $(".toggleSlider").removeClass("flag").addClass("mine");
-        $(".toggleSlider").animate({"left":"0"});
+        $("#mode").removeClass("flag").addClass("mine");
         $("#minesFlaggedCount").html(numberOfMines-playerMineMap.length);
         for (var i = 0; i < numberOfRows; i++) {
             str += '<div class="tray clear">';
@@ -199,7 +198,7 @@ $(document).ready(function () {
             },1000);
         }
            
-            if($(".toggleSlider").hasClass("mine") && !($(this).hasClass("flag")))
+            if($("#mode").hasClass("mine") && !($(this).hasClass("flag")))
             {
                 findMines.call(this);
             }
@@ -211,23 +210,14 @@ $(document).ready(function () {
     };
     var changeMode = function()
     {
-        if($(this).hasClass("mine")){
 
-            $(this).animate({"left":"52px"});
-        }
-        else
-        {
-            $(this).animate({"left":"0"});
-        
-        }
          $(this).toggleClass("mine flag");
       
     };
    
     /*Event handler for user's click on the tile*/
     $("#colosseum").on("click",".tile.active",checkMode);
-    $(".toggleSlider").on("click",changeMode);
-    $(".toggleSlider").on("touchmove",changeMode);
+    $("#mode").on("click",changeMode);
     init();
     
 });
